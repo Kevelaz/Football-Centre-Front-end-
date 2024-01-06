@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="homePage.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="homePage.js" async defer></script>
+  </head>
+  <body>
+    <h1>Football Centre</h1>
+    <form id="playerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="currentTeam">Current Team:</label>
+      <input type="text" id="currentTeam" name="currentTeam" required>
+      
+      <label for="nationality"> Nationality:</label>
+      <input type="text" id="nationality" name="nationality" required>
+
+      <div class="'button-container">
+        <button type="submit" id="submit-btn" onclick="handleSearch(event)"> Submit</button>
+        <button type="button" id="favorites-btn">Favorites</button>
+      </div>
+    </form>
+
+    
+  </body>
+</html>
