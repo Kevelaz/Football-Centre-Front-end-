@@ -7,9 +7,9 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="homePage.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="homePage.js" async defer></script>
+    <link rel="stylesheet" href="homePage.css">
   </head>
   <body>
     <h1>Football Centre</h1>
@@ -17,18 +17,14 @@
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
 
-      <label for="currentTeam">Current Team:</label>
-      <input type="text" id="currentTeam" name="currentTeam" required>
-      
-      <label for="nationality"> Nationality:</label>
-      <input type="text" id="nationality" name="nationality" required>
-
       <div class="'button-container">
-        <button type="submit" id="submit-btn" onclick="handleSearch(event)"> Submit</button>
+        <button type="button" id="search-btn"> Search</button>
         <button type="button" id="favorites-btn">Favorites</button>
       </div>
     </form>
 
-    
+    <div id="player-info-container">
+      
+    </div>
   </body>
 </html>

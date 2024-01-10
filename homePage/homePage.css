@@ -3,6 +3,7 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  background-color: rgba(119, 22, 96, 0.294);
 }
 header {
   background-color: #333;

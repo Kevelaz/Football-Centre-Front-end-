@@ -1,28 +1,22 @@
-/*const apiUrl = 'http://localhost:3000';
+function getRegistrationData(){
+  const username = document.getElementById('username').value;
+  return { username }
 
-async function login() {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  
-  try {
-    const response = await fetch(`${apiUrl}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body:JSON.stringify({email, password}),
-    });
-    const data = await response.json();
-    if(response.ok) {
-      const token = data.token
-      localStorage.setItem('token', token);
+}
 
-      document.getElementById('result').innerHTML = 'login successful';
-    } else {
-      document.getElementById('result').innerHTML = `login failed: ${data.message}`;
-    }
-  } catch (error) {
-    console.error('error during login:', error);
-    document.getElementById('result').innerHTML = 'an error occured during login'
-  }
-}*/
+function registerUser(event) {
+  event.preventDefault();
+  const registrationData = getRegistrationData();
+
+  axios.post('http://localhost:3000/users/register', registrationData)
+      .then(response => {
+        console.log(response.data)
+
+        window.location.href = `homePage/homePage.html`;
+      })
+      .catch(error => {
+        console.error(error)
+      })
+}
+
+document.getElementById('submit-btn').addEventListener('click', registerUser)
