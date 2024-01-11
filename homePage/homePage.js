@@ -87,7 +87,7 @@ document.getElementById('search-btn').addEventListener('click', getPlayerInfo);
 
 document.getElementById('favorites-btn').addEventListener('click', function () {
 
-  axios.get('https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list')
+  axios.get('https://football-centre-4c09b58d53b0.herokuapp.com/main/favorite-list')
     .then(response => {
 
       const playerList = response.data;
@@ -121,7 +121,7 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
 });
 
 function deletePlayer(playerId) {
-  axios.delete(`https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list/${playerId}`)
+  axios.delete(`https://football-centre-4c09b58d53b0.herokuapp.com/main/favorite-list/${playerId}`)
   .then(response => {
     document.getElementById('favorites-btn').click()
   })
@@ -144,7 +144,7 @@ function editPlayer(playerId) {
   if (newName) data.name = newName
   if (newCurrentTeam) data.currentTeam = newCurrentTeam
 
-  axios.put(`https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list/${playerId}`, data)
+  axios.put(`https://football-centre-4c09b58d53b0.herokuapp.com/main/favorite-list/${playerId}`, data)
     .then(response => {
       document.getElementById('favorites-btn').click()
       alert('Player updated successfully.')
