@@ -5,7 +5,7 @@ function getPlayerInfo  () {
 
   const apiUrl  = isPlayerId
     ?`https://football-centre-4c09b58d53b0.herokuapp.com/${encodeURIComponent(input)}`
-    :`https://football-centre-4c09b58d53b0.herokuapp.com//main/players/?name=${encodeURIComponent(input)}`
+    :`https://football-centre-4c09b58d53b0.herokuapp.com/main/players/?name=${encodeURIComponent(input)}`
       
     console.log('Constructed URL:', apiUrl);
   axios.get(apiUrl)
@@ -62,7 +62,7 @@ function displayPlayerInfo(playerData) {
 
 
 function markPlayerAsFavorite(playerId, buttonElement) {
-  axios.post(`https://football-centre-4c09b58d53b0.herokuapp.com//main/players/${playerId}/favorite`)
+  axios.post(`https://football-centre-4c09b58d53b0.herokuapp.com/main/players/${playerId}/favorite`)
   .then(response => {
     if(response && response.data) {
       buttonElement.textContent = 'Favorited!'
@@ -121,7 +121,7 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
 });
 
 function deletePlayer(playerId) {
-  axios.delete(`https://football-centre-4c09b58d53b0.herokuapp.com//favorite-list/${playerId}`)
+  axios.delete(`https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list/${playerId}`)
   .then(response => {
     document.getElementById('favorites-btn').click()
   })
@@ -144,7 +144,7 @@ function editPlayer(playerId) {
   if (newName) data.name = newName
   if (newCurrentTeam) data.currentTeam = newCurrentTeam
 
-  axios.put(`https://football-centre-4c09b58d53b0.herokuapp.com//favorite-list/${playerId}`, data)
+  axios.put(`https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list/${playerId}`, data)
     .then(response => {
       document.getElementById('favorites-btn').click()
       alert('Player updated successfully.')
