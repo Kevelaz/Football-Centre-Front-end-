@@ -4,7 +4,7 @@ function getPlayerInfo  () {
   const isPlayerId = /^\d+$/.test(input)
 
   const apiUrl  = isPlayerId
-    ?`https://football-centre-4c09b58d53b0.herokuapp.com/${encodeURIComponent(input)}`
+    ?`https://football-centre-4c09b58d53b0.herokuapp.com/main/players/${encodeURIComponent(input)}`
     :`https://football-centre-4c09b58d53b0.herokuapp.com/main/players/?name=${encodeURIComponent(input)}`
       
     console.log('Constructed URL:', apiUrl);
