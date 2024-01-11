@@ -3,7 +3,7 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
-  background-color: rgba(119, 22, 96, 0.294);
+  background-color:#2F4858;
 }
 header {
   background-color: #333;
@@ -34,10 +34,39 @@ button {
   cursor: pointer;
 }
 #submit-btn {
-  background-color:aqua;
-  color: red;
+  background-color:#deb887;
+
 }
 #favorites-btn {
-  background-color: aqua;
-  color:red
+  background-color: #deb887;
+  color:red;
+  border-radius: 12px;
 }
+.player-column {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  display: inline-block;
+  position: relative; 
+  background-color: #deb887;
+}
+.edit-form {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.player-buttons {
+  margin-top: 10px;
+  background-color: bisque;
+}
+#search-btn {
+  background-color: #deb887;
+  border-radius: 12px;
+}
+h1, h2 ,label{
+  color:#deb887;
+}
+
+  

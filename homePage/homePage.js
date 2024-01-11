@@ -5,7 +5,7 @@ function getPlayerInfo  () {
 
   const apiUrl  = isPlayerId
     ?`http://localhost:3000/main/players/${encodeURIComponent(input)}`
-    :`http://localhost:3000/main/players?name=${encodeURIComponent(input)}`
+    :`http://localhost:3000/main/players/?name=${encodeURIComponent(input)}`
       
     console.log('Constructed URL:', apiUrl);
   axios.get(apiUrl)
@@ -49,25 +49,28 @@ function displayPlayerInfo(playerData) {
       <div>Short Name: ${playerData.currentTeam.shortName}</div>
       <div>Founded: ${playerData.currentTeam.founded}</div>
       <div>Club Colors: ${playerData.currentTeam.clubColors}</div>
-      <!-- Add more details as needed -->
+
   `;
   playerInfoContainer.appendChild(teamDetailsElement);
 
 
   const favoriteButton = document.createElement('button');
   favoriteButton.textContent = 'Favorite';
-  favoriteButton.addEventListener('click', () => markPlayerAsFavorite(playerData.id));
+  favoriteButton.addEventListener('click', () => markPlayerAsFavorite(playerData.playerId, favoriteButton));
   playerInfoContainer.appendChild(favoriteButton);
 }
 
 
 function markPlayerAsFavorite(playerId, buttonElement) {
-
   axios.post(`http://localhost:3000/main/players/${playerId}/favorite`)
   .then(response => {
-    console.log('player marked as favorite', response.data)
-    buttonElement.textContent = 'Favorited!'
-    buttonElement.disabled = true
+    if(response && response.data) {
+      buttonElement.textContent = 'Favorited!'
+      buttonElement.disabled = true
+    } else {
+      console.error('invalid response received', response)
+    }
+
   })
   .catch(error => {
     console.error('error marking player as favorite', error)
@@ -89,13 +92,13 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
 
       const playerList = response.data;
 
-      const favoritesPage = document.createElement('div');
-      favoritesPage.innerHTML = '<h2>Favorites</h2>';
+      const favoritesPage = document.createElement('div')
+      favoritesPage.innerHTML = '<h2>Favorites</h2>'
 
 
       playerList.forEach(player => {
-        const playerColumn = document.createElement('div');
-        playerColumn.classList.add('player-column');
+        const playerColumn = document.createElement('div')
+        playerColumn.classList.add('player-column')
         playerColumn.innerHTML = `
         <p>Name: ${player.name}</p>
         <p>Nationality: ${player.nationality}</p>
@@ -104,14 +107,15 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
                 <button onclick="editPlayer('${player._id}')">Edit</button>
                 <button onclick="deletePlayer('${player._id}')">Delete</button>
         </div>
-        `;
+        `
+
         favoritesPage.appendChild(playerColumn);
-      });
+      })
 
 
-      const playerInfoContainer = document.getElementById('player-info-container');
-      playerInfoContainer.innerHTML = '';
-      playerInfoContainer.appendChild(favoritesPage);
+      const playerInfoContainer = document.getElementById('player-info-container')
+      playerInfoContainer.innerHTML = ''
+      playerInfoContainer.appendChild(favoritesPage)
     })
     .catch(error => console.error('Error fetching favorite player list:', error));
 });
@@ -119,11 +123,39 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
 function deletePlayer(playerId) {
   axios.delete(`http://localhost:3000/favorite-list/${playerId}`)
   .then(response => {
-    document.getElementById('favorites-btn').click();
+    document.getElementById('favorites-btn').click()
   })
   .catch(error => console.error('error deleting player from list', error))
 }
 
+
+
+
 function editPlayer(playerId) {
-  
+  const newName = prompt("Enter the new name (leave blank to keep current):")
+  const newCurrentTeam = prompt("Enter the new current team (leave blank to keep current):")
+
+  if (!newName && !newCurrentTeam) {
+    alert("No changes made.")
+    return
+  }
+
+  const data = {}
+  if (newName) data.name = newName
+  if (newCurrentTeam) data.currentTeam = newCurrentTeam
+
+  axios.put(`http://localhost:3000/favorite-list/${playerId}`, data)
+    .then(response => {
+      document.getElementById('favorites-btn').click()
+      alert('Player updated successfully.')
+    })
+    .catch(error => {
+      console.error('Error updating player:', error)
+      alert('Error updating player. Please try again.')
+    });
 }
+
+
+
+
+
