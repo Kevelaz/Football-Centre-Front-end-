@@ -4,8 +4,8 @@ function getPlayerInfo  () {
   const isPlayerId = /^\d+$/.test(input)
 
   const apiUrl  = isPlayerId
-    ?`http://localhost:3000/main/players/${encodeURIComponent(input)}`
-    :`http://localhost:3000/main/players/?name=${encodeURIComponent(input)}`
+    ?`https://football-centre-4c09b58d53b0.herokuapp.com/${encodeURIComponent(input)}`
+    :`https://football-centre-4c09b58d53b0.herokuapp.com//main/players/?name=${encodeURIComponent(input)}`
       
     console.log('Constructed URL:', apiUrl);
   axios.get(apiUrl)
@@ -62,7 +62,7 @@ function displayPlayerInfo(playerData) {
 
 
 function markPlayerAsFavorite(playerId, buttonElement) {
-  axios.post(`http://localhost:3000/main/players/${playerId}/favorite`)
+  axios.post(`https://football-centre-4c09b58d53b0.herokuapp.com//main/players/${playerId}/favorite`)
   .then(response => {
     if(response && response.data) {
       buttonElement.textContent = 'Favorited!'
@@ -87,7 +87,7 @@ document.getElementById('search-btn').addEventListener('click', getPlayerInfo);
 
 document.getElementById('favorites-btn').addEventListener('click', function () {
 
-  axios.get('http://localhost:3000/favorite-list')
+  axios.get('https://football-centre-4c09b58d53b0.herokuapp.com/favorite-list')
     .then(response => {
 
       const playerList = response.data;
@@ -121,7 +121,7 @@ document.getElementById('favorites-btn').addEventListener('click', function () {
 });
 
 function deletePlayer(playerId) {
-  axios.delete(`http://localhost:3000/favorite-list/${playerId}`)
+  axios.delete(`https://football-centre-4c09b58d53b0.herokuapp.com//favorite-list/${playerId}`)
   .then(response => {
     document.getElementById('favorites-btn').click()
   })
@@ -144,7 +144,7 @@ function editPlayer(playerId) {
   if (newName) data.name = newName
   if (newCurrentTeam) data.currentTeam = newCurrentTeam
 
-  axios.put(`http://localhost:3000/favorite-list/${playerId}`, data)
+  axios.put(`https://football-centre-4c09b58d53b0.herokuapp.com//favorite-list/${playerId}`, data)
     .then(response => {
       document.getElementById('favorites-btn').click()
       alert('Player updated successfully.')
