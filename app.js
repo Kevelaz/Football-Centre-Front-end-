@@ -8,7 +8,7 @@ function registerUser(event) {
   event.preventDefault();
   const registrationData = getRegistrationData();
 
-  axios.post('http://localhost:3000/users/register', registrationData)
+  axios.post('https://football-centre-4c09b58d53b0.herokuapp.com/', registrationData)
       .then(response => {
         console.log(response.data)
 
